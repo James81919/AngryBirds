@@ -142,23 +142,17 @@
   <ItemGroup>
     <ClCompile Include="b2GLDraw.cpp" />
     <ClCompile Include="Background.cpp" />
-    <ClCompile Include="Ball.cpp" />
     <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="Enemy.cpp" />
-    <ClCompile Include="Goal.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="MeshCube.cpp" />
     <ClCompile Include="MeshPyramid.cpp" />
     <ClCompile Include="MeshSphere.cpp" />
     <ClCompile Include="Pawn.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Player2.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="ShaderLoader.cpp" />
     <ClCompile Include="TextLabel.cpp" />
     <ClCompile Include="Utilities.cpp" />
-    <ClCompile Include="Wall.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\3D.fs" />
@@ -169,24 +163,18 @@
   <ItemGroup>
     <ClInclude Include="b2GLDraw.h" />
     <ClInclude Include="Background.h" />
-    <ClInclude Include="Ball.h" />
     <ClInclude Include="Camera.h" />
-    <ClInclude Include="Enemy.h" />
     <ClInclude Include="glext.h" />
-    <ClInclude Include="Goal.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MeshCube.h" />
     <ClInclude Include="MeshPyramid.h" />
     <ClInclude Include="MeshSphere.h" />
     <ClInclude Include="Pawn.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="Player2.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="ShaderLoader.h" />
     <ClInclude Include="TextLabel.h" />
     <ClInclude Include="Utilities.h" />
-    <ClInclude Include="Wall.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

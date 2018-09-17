@@ -30,13 +30,7 @@
     <ClCompile Include="Scene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Pawn.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MeshPyramid.cpp">
@@ -48,25 +42,13 @@
     <ClCompile Include="MeshSphere.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Ball.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Background.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Wall.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Goal.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TextLabel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Utilities.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Player2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="b2GLDraw.cpp">
@@ -106,13 +88,7 @@
     <ClInclude Include="Utilities.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Pawn.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MeshPyramid.h">
@@ -124,22 +100,10 @@
     <ClInclude Include="MeshSphere.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Ball.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Background.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Wall.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Goal.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="TextLabel.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Player2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="b2GLDraw.h">

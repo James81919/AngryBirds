@@ -25,15 +25,6 @@ private:
 	std::unique_ptr<Camera>
 		camera;
 	std::unique_ptr<Pawn>
-		ball,
-		player,
-		player2,
-		wallU,
-		wallD,
-		wallL,
-		wallR,
-		goalL,
-		goalR,
 		background;
 
 	std::unique_ptr<std::vector<std::unique_ptr<Pawn>>>
