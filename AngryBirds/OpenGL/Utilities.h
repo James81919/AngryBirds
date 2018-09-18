@@ -18,9 +18,3 @@ enum InputState
 void Keyboard_Down(unsigned char key, int x, int y);
 
 void Keyboard_Up(unsigned char key, int x, int y);
-
-void GetDeltaPosition(b2Body* _body, float _fAngle);
-
-void GetDeltaPosition2(b2Body* _body);
-
-float GetDeltaRotation();
