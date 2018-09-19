@@ -23,7 +23,7 @@ private:
 
 	std::unique_ptr<Camera> m_camera;
 
-	//std::unique_ptr<Pawn> m_background;
+	std::unique_ptr<Pawn> m_background;
 	std::unique_ptr<Pawn> m_ball;
 
 	std::unique_ptr<std::vector<std::unique_ptr<Pawn>>> m_vecGameobjects;
