@@ -4,17 +4,20 @@
 
 Pawn::Pawn()
 {
+	m_mesh = std::make_unique<Mesh>();
 }
 
 Pawn::~Pawn()
 {
 }
 
-void Pawn::Init(std::string _sFilepath, glm::vec3 _vecPosition, float _fRotation, glm::vec3 _vecScale, GLuint& _shader)
+void Pawn::Init(std::string _sFilepath, glm::vec3 _vecPosition, float _fRotation, glm::vec3 _vecScale, GLuint& _shader, Camera _camera)
 {
 	m_vecPosition = _vecPosition;
 	m_fRotation = _fRotation;
 	m_vecScale = _vecScale;
+
+	m_mesh->Init();
 }
 
 void Pawn::AddPhysics(bool _bIsFixed, EColliderShape _colliderShape, b2World& _world)

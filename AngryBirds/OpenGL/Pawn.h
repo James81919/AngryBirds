@@ -3,6 +3,7 @@
 #include <memory>
 #include "Mesh.h"
 #include "Utilities.h"
+#include "Camera.h"
 
 enum EColliderShape
 {
@@ -15,7 +16,7 @@ class Pawn
 public:
 	Pawn();
 	~Pawn();
-	virtual void Init(std::string _filepath, glm::vec3 _position, float _rotation, glm::vec3 _scale, GLuint & _shader);
+	virtual void Init(std::string _filepath, glm::vec3 _position, float _rotation, glm::vec3 _scale, GLuint & _shader, Camera _camera);
 	void AddPhysics(bool _isFixed, EColliderShape _colliderType, b2World& _world);
 	virtual void Update(float _deltaTime, glm::mat4 _view, glm::mat4 _projection, glm::vec3 _cameraPos);
 	virtual void Render();

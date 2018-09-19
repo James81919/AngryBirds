@@ -10,10 +10,10 @@ Background::~Background()
 {
 }
 
-void Background::Init(std::string _sFilepath, glm::vec3 _vecPosition, float _fRotation, glm::vec3 _vecScale, GLuint& _shader)
+void Background::Init(std::string _sFilepath, glm::vec3 _vecPosition, float _fRotation, glm::vec3 _vecScale, GLuint& _shader, Camera _camera)
 {
 	m_mesh = std::make_unique<MeshCube>(_sFilepath, _shader);
-	Pawn::Init(_sFilepath, _vecPosition, _fRotation, _vecScale, _shader);
+	Pawn::Init(_sFilepath, _vecPosition, _fRotation, _vecScale, _shader, _camera);
 }
 
 void Background::Render()

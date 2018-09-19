@@ -35,7 +35,7 @@ private:
 	float m_fDeltaTime = 0;
 	float m_fPreviousTime = 0;
 
-	b2World m_world = b2World(b2Vec2(0,0));
+	b2World m_world = b2World(b2Vec2(0,-1));
 
 	float32 m_timeStep = 1.0f / 60.0f;
 	int32 m_velocityInterations = 6;

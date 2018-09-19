@@ -23,9 +23,9 @@ Scene::~Scene()
 
 void Scene::Init()
 {
-	m_background->Init("Resources/Textures/Background.bmp", glm::vec3(10, 5.0f, 1), 0.0f, glm::vec3(10, 10, 1.0f), m_shader);
+	m_background->Init("Resources/Textures/Background.bmp", glm::vec3(10, 5.0f, 1), 0.0f, glm::vec3(10, 10, 1.0f), m_shader, *m_camera);
 
-	m_ball->Init("Resources/Textures/Ball.png", glm::vec3(10.0f, 5.0f, 1.0f), 0.0f, glm::vec3(10.0f, 10.0f, 1.0f), m_shader);
+	m_ball->Init("Resources/Textures/Ball.png", glm::vec3(5.0f, 5.0f, 1.0f), 0.0f, glm::vec3(1.0f, 1.0f, 1.0f), m_shader, *m_camera);
 	m_ball->AddPhysics(false, COLLIDER_CIRCLE, m_world);
 	m_vecGameobjects->push_back(std::move(m_ball));
 
@@ -69,7 +69,7 @@ void Scene::Render()
 
 	m_world.Step(m_timeStep, m_velocityInterations, m_positionIterations);
 
-	m_background->Render();
+	//m_background->Render();
 
 	for (auto&& pawn : *m_vecGameobjects)
 	{
