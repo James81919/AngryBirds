@@ -5,18 +5,16 @@
 
 Scene::Scene()
 {
-	shader =
-		shaderloader.CreateProgram("Resources/Shaders/3D.vs", "Resources/Shaders/3D.fs");
-	camera =
-		std::make_unique<Camera>();
+	m_shader = m_shaderloader.CreateProgram("Resources/Shaders/3D.vs", "Resources/Shaders/3D.fs");
+	
+	m_camera = std::make_unique<Camera>();
+	
+	m_label = std::make_unique<TextLabel>("Player Score: " + std::to_string(m_fGametimer), "Resources/Fonts/arial.ttf", glm::vec2(10, 15));
 
-	label =
-		std::make_unique<TextLabel>("Player Score: " + std::to_string(gametimer), "Resources/Fonts/arial.ttf", glm::vec2(10, 15));
-	//background =
-	//	std::make_shared<Background>();
+	m_background = std::make_unique<Background>();
+	m_ball = std::make_unique<Pawn>();
 
-	gameobjects =
-		std::make_unique<std::vector<std::unique_ptr<Pawn>>>();
+	m_vecGameobjects = std::make_unique<std::vector<std::unique_ptr<Pawn>>>();
 }
 
 Scene::~Scene()
@@ -25,8 +23,11 @@ Scene::~Scene()
 
 void Scene::Init()
 {
-	//background->Init("Resources/Textures/Background.bmp",	glm::vec3(10, 5.0f, 1),			0.0f,			glm::vec3(10, 10, 1.0f), shader, m_world);
-	//gameobjects->push_back(background);
+	m_background->Init("Resources/Textures/Background.bmp", glm::vec3(10, 5.0f, 1), 0.0f, glm::vec3(10, 10, 1.0f), m_shader);
+
+	m_ball->Init("Resources/Textures/Ball.png", glm::vec3(10.0f, 5.0f, 1.0f), 0.0f, glm::vec3(10.0f, 10.0f, 1.0f), m_shader);
+	m_ball->AddPhysics(false, COLLIDER_CIRCLE, m_world);
+	m_vecGameobjects->push_back(std::move(m_ball));
 
 	m_world.SetDebugDraw(&m_debugDraw);
 	uint32 flags = 0;
@@ -41,25 +42,25 @@ void Scene::Init()
 void Scene::Update()
 {
 	//DeltaTime
-	if (firstrun == false)
+	if (m_bIsFirstRun == false)
 	{
-		previousTime = static_cast<float>(glutGet(GLUT_ELAPSED_TIME));
-		firstrun = true;
+		m_fPreviousTime = static_cast<float>(glutGet(GLUT_ELAPSED_TIME));
+		m_bIsFirstRun = true;
 	}
 	float currentTime = static_cast<float>(glutGet(GLUT_ELAPSED_TIME));
-	deltaTime = (currentTime - previousTime) * 0.001f;
-	previousTime = currentTime;
+	m_fDeltaTime = (currentTime - m_fPreviousTime) * 0.001f;
+	m_fPreviousTime = currentTime;
 
-	for (auto&& pawn : *gameobjects)
+	for (auto&& pawn : *m_vecGameobjects)
 	{
 		if (pawn)
 		{
-			pawn->Update(deltaTime, camera->GetView(), camera->GetProjection(), camera->GetLocation());
+			pawn->Update(m_fDeltaTime, m_camera->GetView(), m_camera->GetProjection(), m_camera->GetLocation());
 		}
 	}
 
-	gametimer -= deltaTime;
-	label->Update(std::to_string(static_cast<int>(gametimer)));
+	m_fGametimer -= m_fDeltaTime;
+	m_label->Update(std::to_string(static_cast<int>(m_fGametimer)));
 }
 
 void Scene::Render()
@@ -68,12 +69,14 @@ void Scene::Render()
 
 	m_world.Step(m_timeStep, m_velocityInterations, m_positionIterations);
 
-	for (auto&& pawn : *gameobjects)
+	m_background->Render();
+
+	for (auto&& pawn : *m_vecGameobjects)
 	{
 		if (pawn)
 		{
 			pawn->Render();
 		}
 	}
-	label->Render();
+	m_label->Render();
 }

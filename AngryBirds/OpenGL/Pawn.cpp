@@ -10,10 +10,17 @@ Pawn::~Pawn()
 {
 }
 
-void Pawn::Init(std::string t_filepath, glm::vec3 t_position, float t_rotation, glm::vec3 t_scale, GLuint & t_shader, bool t_isFixed, EColliderShape t_colliderShape, b2World& t_world)
+void Pawn::Init(std::string _sFilepath, glm::vec3 _vecPosition, float _fRotation, glm::vec3 _vecScale, GLuint& _shader)
+{
+	m_vecPosition = _vecPosition;
+	m_fRotation = _fRotation;
+	m_vecScale = _vecScale;
+}
+
+void Pawn::AddPhysics(bool _bIsFixed, EColliderShape _colliderShape, b2World& _world)
 {
 	b2BodyDef bd;
-	if (t_isFixed)
+	if (_bIsFixed)
 	{
 		bd.type = b2_kinematicBody;
 	}
@@ -22,26 +29,26 @@ void Pawn::Init(std::string t_filepath, glm::vec3 t_position, float t_rotation, 
 		bd.type = b2_dynamicBody;
 	}
 
-	bd.position = b2Vec2(t_position.x, t_position.y);
-	m_physicsBody = t_world.CreateBody(&bd);
+	bd.position = b2Vec2(m_vecPosition.x, m_vecPosition.y);
+	m_physicsBody = _world.CreateBody(&bd);
 
-	if (t_colliderShape == COLLIDER_CIRCLE)
+	if (_colliderShape == COLLIDER_CIRCLE)
 	{
-		m_colliderShape = t_colliderShape;
+		m_colliderShape = _colliderShape;
 		b2CircleShape objectShape;
 		objectShape.m_p.Set(0, 0);
-		objectShape.m_radius = t_scale.x;
+		objectShape.m_radius = m_vecScale.x;
 		b2FixtureDef fixtureDef;
 		fixtureDef.shape = &objectShape;
 		fixtureDef.density = 1.0f;
 		fixtureDef.friction = 1000.0f;
 		m_physicsBody->CreateFixture(&fixtureDef);
 	}
-	else if (t_colliderShape == COLLIDER_SQUARE)
+	else if (_colliderShape == COLLIDER_SQUARE)
 	{
-		m_colliderShape = t_colliderShape;
+		m_colliderShape = _colliderShape;
 		b2PolygonShape objectShape;
-		objectShape.SetAsBox(t_scale.x, t_scale.y);
+		objectShape.SetAsBox(m_vecScale.x, m_vecScale.y);
 		b2FixtureDef fixtureDef;
 		fixtureDef.shape = &objectShape;
 		fixtureDef.density = 1.0f;
@@ -50,58 +57,57 @@ void Pawn::Init(std::string t_filepath, glm::vec3 t_position, float t_rotation, 
 	}
 
 	m_physicsBody->SetFixedRotation(true);
-
-	location = t_position;
-	rotation = t_rotation;
-	scale = t_scale;
 }
 
-void Pawn::Update(float t_deltaTime, glm::mat4 t_view, glm::mat4 t_projection, glm::vec3 t_cameraPos)
+void Pawn::Update(float _fDeltaTime, glm::mat4 _view, glm::mat4 _projection, glm::vec3 _vecCameraPos)
 {
-	rotation = m_physicsBody->GetAngle();
-	location = glm::vec3(m_physicsBody->GetPosition().x, m_physicsBody->GetPosition().y, 0);
-	//scale = 
-	mesh->Update
+	if (m_physicsBody != nullptr)
+	{
+		m_fRotation = m_physicsBody->GetAngle();
+		m_vecPosition = glm::vec3(m_physicsBody->GetPosition().x, m_physicsBody->GetPosition().y, 0);
+	}
+
+	m_mesh->Update
 	(
-		t_projection,
-		t_view,
+		_projection,
+		_view,
 		(
-			glm::translate(glm::mat4(), location) *
-			glm::rotate(glm::mat4(), glm::radians(rotation), glm::vec3(0, 0, 1)) *
-			glm::scale(glm::mat4(), scale)
+			glm::translate(glm::mat4(), m_vecPosition) *
+			glm::rotate(glm::mat4(), glm::radians(m_fRotation), glm::vec3(0, 0, 1)) *
+			glm::scale(glm::mat4(), m_vecScale)
 			),
-		t_cameraPos
+		_vecCameraPos
 	);
 }
 
 void Pawn::Render()
 {
-	mesh->Render();
+	m_mesh->Render();
 }
 
-void Pawn::applyForce(glm::vec3 force)
+void Pawn::applyForce(glm::vec3 _force)
 {
-	acceleration += force;
+	m_vecAcceleration += _force;
 }
 
-void Pawn::seek(glm::vec3 target)
+void Pawn::seek(glm::vec3 _target)
 {
-	applyForce(limit((glm::normalize(target - location) * maxspeed) - velocity, maxforce));
+	applyForce(limit((glm::normalize(_target - m_vecPosition) * m_fMaxspeed) - m_vecVelocity, m_fMaxforce));
 }
 
-glm::vec3 Pawn::limit(glm::vec3 vec, float max)
+glm::vec3 Pawn::limit(glm::vec3 _vec, float _max)
 {
-	float magSq = glm::length(vec) * glm::length(vec);
+	float magSq = glm::length(_vec) * glm::length(_vec);
 
-	if (magSq > max * max)
+	if (magSq > _max * _max)
 	{
-		if (vec != glm::vec3())
+		if (_vec != glm::vec3())
 		{
-			vec = glm::normalize(vec);
+			_vec = glm::normalize(_vec);
 		}
-		vec *= max;
+		_vec *= _max;
 	}
-	return vec;
+	return _vec;
 }
 
 b2Body* Pawn::GetBody()

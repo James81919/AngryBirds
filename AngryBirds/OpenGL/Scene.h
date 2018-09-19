@@ -18,29 +18,22 @@ public:
 	void Render();
 
 private:
-	ShaderLoader
-		shaderloader;
-	GLuint
-		shader;
-	std::unique_ptr<Camera>
-		camera;
-	std::unique_ptr<Pawn>
-		background;
+	ShaderLoader m_shaderloader;
+	GLuint m_shader;
 
-	std::unique_ptr<std::vector<std::unique_ptr<Pawn>>>
-		gameobjects;
+	std::unique_ptr<Camera> m_camera;
 
-	std::unique_ptr<TextLabel>
-		label;
+	std::unique_ptr<Pawn> m_background;
+	std::unique_ptr<Pawn> m_ball;
 
-	float gametimer =
-		60;
-	bool firstrun =
-		false;
-	float deltaTime =
-		0;
-	float previousTime =
-		0;
+	std::unique_ptr<std::vector<std::unique_ptr<Pawn>>> m_vecGameobjects;
+
+	std::unique_ptr<TextLabel> m_label;
+
+	float m_fGametimer = 60;
+	bool m_bIsFirstRun = false;
+	float m_fDeltaTime = 0;
+	float m_fPreviousTime = 0;
 
 	b2World m_world = b2World(b2Vec2(0,0));
 

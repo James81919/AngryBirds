@@ -15,41 +15,38 @@ class Pawn
 public:
 	Pawn();
 	~Pawn();
-	virtual void Init(std::string t_filepath, glm::vec3 t_position, float t_rotation, glm::vec3 t_scale, GLuint & t_shader, bool _isFixed, EColliderShape t_colliderShape, b2World& t_world);
-	virtual void Update(float t_deltaTime, glm::mat4 t_view, glm::mat4 t_projection, glm::vec3 t_cameraPos);
+	virtual void Init(std::string _filepath, glm::vec3 _position, float _rotation, glm::vec3 _scale, GLuint & _shader);
+	void AddPhysics(bool _isFixed, EColliderShape _colliderType, b2World& _world);
+	virtual void Update(float _deltaTime, glm::mat4 _view, glm::mat4 _projection, glm::vec3 _cameraPos);
 	virtual void Render();
 
-	void applyForce(glm::vec3 force);
-	glm::vec3 limit(glm::vec3 vec, float max);
-	void seek(glm::vec3 target);
+	void applyForce(glm::vec3 _force);
+	glm::vec3 limit(glm::vec3 _vec, float _max);
+	void seek(glm::vec3 _target);
 
-	glm::vec3 GetLocation() { return location; }
-	void SetLocation(glm::vec3 t_location) { location = t_location; }
+	glm::vec3 GetLocation() { return m_vecPosition; }
+	void SetLocation(glm::vec3 _location) { m_vecPosition = _location; }
 
-	float GetRotation() { return rotation; }
-	void SetRotation(float t_rotation) { rotation = t_rotation; }
+	float GetRotation() { return m_fRotation; }
+	void SetRotation(float _rotation) { m_fRotation = _rotation; }
 
-	glm::vec3 GetScale() { return scale; }
-	void SetScale(glm::vec3 t_scale) { scale = t_scale; }
+	glm::vec3 GetScale() { return m_vecScale; }
+	void SetScale(glm::vec3 _scale) { m_vecScale = _scale; }
 
 	b2Body* GetBody();
 
 protected:
-	std::unique_ptr<Mesh>
-		mesh;
+	std::unique_ptr<Mesh> m_mesh;
 
-	glm::vec3
-		location,
-		scale;
-	float
-		rotation;
+	glm::vec3 m_vecPosition, m_vecScale;
+	float m_fRotation;
 
-	glm::vec3 velocity;
-	glm::vec3 acceleration;
+	glm::vec3 m_vecVelocity;
+	glm::vec3 m_vecAcceleration;
 
-	float r;
-	float maxforce;
-	float maxspeed;
+	float m_fR;
+	float m_fMaxforce;
+	float m_fMaxspeed;
 
 	b2Body* m_physicsBody;
 
