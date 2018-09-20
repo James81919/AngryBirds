@@ -23,8 +23,7 @@ private:
 
 	std::unique_ptr<Camera> m_camera;
 
-	std::unique_ptr<Pawn> m_background;
-	std::unique_ptr<Pawn> m_ball;
+	std::unique_ptr<Pawn> m_background, m_ground, m_ball, m_ball2;
 
 	std::unique_ptr<std::vector<std::unique_ptr<Pawn>>> m_vecGameobjects;
 
@@ -35,7 +34,7 @@ private:
 	float m_fDeltaTime = 0;
 	float m_fPreviousTime = 0;
 
-	b2World m_world = b2World(b2Vec2(0,-1));
+	b2World m_world = b2World(b2Vec2(0,-9.81f));
 
 	float32 m_timeStep = 1.0f / 60.0f;
 	int32 m_velocityInterations = 6;

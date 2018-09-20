@@ -12,7 +12,9 @@ Scene::Scene()
 	m_label = std::make_unique<TextLabel>("Player Score: " + std::to_string(m_fGametimer), "Resources/Fonts/arial.ttf", glm::vec2(10, 15));
 
 	m_background = std::make_unique<Background>();
+	m_ground = std::make_unique<Pawn>();
 	m_ball = std::make_unique<Pawn>();
+	m_ball2 = std::make_unique<Pawn>();
 
 	m_vecGameobjects = std::make_unique<std::vector<std::unique_ptr<Pawn>>>();
 }
@@ -23,11 +25,20 @@ Scene::~Scene()
 
 void Scene::Init()
 {
-	m_background->Init("Resources/Textures/Background.bmp", glm::vec3(10, 5.0f, 1), 0.0f, glm::vec3(10, 10, 1.0f), m_shader, *m_camera);
+	m_background->Init("Resources/Textures/Background.bmp", glm::vec3(WINDOW_WIDTH/80, WINDOW_HEIGHT/80, 0), 0.0f, glm::vec3(WINDOW_WIDTH/40, WINDOW_HEIGHT/40, 1), m_shader, *m_camera);
+	m_vecGameobjects->push_back(std::move(m_background));
 
-	m_ball->Init("Resources/Textures/Ball.png", glm::vec3(5.0f, 5.0f, 1.0f), 0.0f, glm::vec3(1.0f, 1.0f, 1.0f), m_shader, *m_camera);
+	m_ground->Init("Resources/Textures/Box.png", glm::vec3(10, 0.0f, 1.0f), 0.0f, glm::vec3(WINDOW_WIDTH/80, 0, 0.0f), m_shader, *m_camera);
+	m_ground->AddPhysics(true, COLLIDER_SQUARE, m_world);
+	m_vecGameobjects->push_back(std::move(m_ground));
+
+	m_ball->Init("Resources/Textures/Ball.png", glm::vec3(5.0f, 5.0f, 1.0f), 0.0f, glm::vec3(1.0f, 1.0f, 0.0f), m_shader, *m_camera);
 	m_ball->AddPhysics(false, COLLIDER_CIRCLE, m_world);
 	m_vecGameobjects->push_back(std::move(m_ball));
+
+	m_ball2->Init("Resources/Textures/Ball.png", glm::vec3(5.5f, 5.5f, 1.0f), 0.0f, glm::vec3(1.0f, 1.0f, 0.0f), m_shader, *m_camera);
+	m_ball2->AddPhysics(false, COLLIDER_CIRCLE, m_world);
+	m_vecGameobjects->push_back(std::move(m_ball2));
 
 	m_world.SetDebugDraw(&m_debugDraw);
 	uint32 flags = 0;
@@ -68,8 +79,6 @@ void Scene::Render()
 	m_world.DrawDebugData();
 
 	m_world.Step(m_timeStep, m_velocityInterations, m_positionIterations);
-
-	//m_background->Render();
 
 	for (auto&& pawn : *m_vecGameobjects)
 	{
