@@ -20,6 +20,10 @@ void Render()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glClearColor(1.0, 1.0, 1.0, 1.0);
+
+	//glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	//glDrawArrays(GL_TRIANGLES, 0, 5);
+
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
 	glFrontFace(GL_CW);

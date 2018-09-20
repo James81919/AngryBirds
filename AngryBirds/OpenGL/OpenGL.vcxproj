@@ -144,13 +144,10 @@
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Mesh.cpp" />
-    <ClCompile Include="MeshCube.cpp" />
-    <ClCompile Include="MeshPyramid.cpp" />
-    <ClCompile Include="MeshSphere.cpp" />
     <ClCompile Include="Pawn.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="ShaderLoader.cpp" />
+    <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="TextLabel.cpp" />
     <ClCompile Include="Utilities.cpp" />
   </ItemGroup>
@@ -166,13 +163,10 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="glext.h" />
     <ClInclude Include="Input.h" />
-    <ClInclude Include="Mesh.h" />
-    <ClInclude Include="MeshCube.h" />
-    <ClInclude Include="MeshPyramid.h" />
-    <ClInclude Include="MeshSphere.h" />
     <ClInclude Include="Pawn.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="ShaderLoader.h" />
+    <ClInclude Include="Sprite.h" />
     <ClInclude Include="TextLabel.h" />
     <ClInclude Include="Utilities.h" />
   </ItemGroup>

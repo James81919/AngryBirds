@@ -1,10 +1,16 @@
 #pragma once
-#include "Dependencies/glm/vec3.hpp"
+#include <glew.h>
+#include <freeglut.h>
+#include <SOIL.h>
 #include <Box2D\Box2D.h>
 #include "Dependencies\Box2D\Common\b2Draw.h"
 #include "b2GLDraw.h"
 
-const int WINDOW_WIDTH = 800;
+#include <glm.hpp>
+#include "Dependencies\glm\gtc\matrix_transform.hpp"
+#include "Dependencies\glm\gtc\type_ptr.hpp"
+
+const int WINDOW_WIDTH = 1000;
 const int WINDOW_HEIGHT = 600;
 
 enum InputState
