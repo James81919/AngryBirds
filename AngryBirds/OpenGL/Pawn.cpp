@@ -27,13 +27,18 @@ void Pawn::AddPhysics(bool _bIsFixed, EColliderShape _colliderShape, b2World& _w
 	if (_bIsFixed)
 	{
 		bd.type = b2_kinematicBody;
+		bd.fixedRotation = true;
 	}
 	else
 	{
 		bd.type = b2_dynamicBody;
+		bd.fixedRotation = false;
+		bd.linearDamping = 0.35f;
+		b2Dest
 	}
 
 	bd.position = b2Vec2(m_position.x, m_position.y);
+	bd.angle = glm::radians(m_fRotation);
 	m_physicsBody = _world.CreateBody(&bd);
 
 	if (_colliderShape == COLLIDER_CIRCLE)
@@ -45,7 +50,7 @@ void Pawn::AddPhysics(bool _bIsFixed, EColliderShape _colliderShape, b2World& _w
 		b2FixtureDef fixtureDef;
 		fixtureDef.shape = &objectShape;
 		fixtureDef.density = 1.0f;
-		fixtureDef.friction = 1000.0f;
+		fixtureDef.friction = 1.0f;
 		m_physicsBody->CreateFixture(&fixtureDef);
 	}
 	else if (_colliderShape == COLLIDER_SQUARE)
@@ -56,18 +61,16 @@ void Pawn::AddPhysics(bool _bIsFixed, EColliderShape _colliderShape, b2World& _w
 		b2FixtureDef fixtureDef;
 		fixtureDef.shape = &objectShape;
 		fixtureDef.density = 1.0f;
-		fixtureDef.friction = 1000.0f;
+		fixtureDef.friction = 1.0f;
 		m_physicsBody->CreateFixture(&fixtureDef);
 	}
-
-	m_physicsBody->SetFixedRotation(true);
 }
 
 void Pawn::Update(float _fDeltaTime, glm::mat4 _view, glm::mat4 _projection, glm::vec3 _cameraPos)
 {
 	if (m_physicsBody != nullptr)
 	{
-		m_fRotation = m_physicsBody->GetAngle();
+		m_fRotation = glm::degrees(m_physicsBody->GetAngle());
 		m_position = glm::vec3(m_physicsBody->GetPosition().x, m_physicsBody->GetPosition().y, 0);
 	}
 
@@ -77,7 +80,7 @@ void Pawn::Update(float _fDeltaTime, glm::mat4 _view, glm::mat4 _projection, glm
 		_view,
 		(
 			glm::translate(glm::mat4(), m_position) *
-			glm::rotate(glm::mat4(), glm::radians(m_fRotation), glm::vec3(0, 0, 1)) *
+			glm::rotate(glm::mat4(), m_fRotation, glm::vec3(0, 0, 1)) *
 			glm::scale(glm::mat4(), m_scale)
 			),
 		_cameraPos
