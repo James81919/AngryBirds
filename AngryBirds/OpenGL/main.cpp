@@ -21,9 +21,6 @@ void Render()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glClearColor(1.0, 1.0, 1.0, 1.0);
 
-	//glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	//glDrawArrays(GL_TRIANGLES, 0, 5);
-
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
 	glFrontFace(GL_CW);
@@ -43,16 +40,12 @@ void Update()
 int main(int argc, char** argv)
 {
 	glutInit(&argc, argv);
-	glutInitDisplayMode(
-		GLUT_DEPTH |
-		GLUT_DOUBLE |
-		GLUT_RGBA |
-		GLUT_MULTISAMPLE);
+	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA | GLUT_MULTISAMPLE);
 	glutSetOption(GLUT_MULTISAMPLE, 8);
 	glEnable(GL_MULTISAMPLE);
 	glutInitWindowPosition(200, 200);
 	glutInitWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-	glutCreateWindow("OpenGL");
+	glutCreateWindow("Angry Birds");
 	glewInit();
 	Init();
 

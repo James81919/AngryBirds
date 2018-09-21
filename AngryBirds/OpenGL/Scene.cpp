@@ -28,15 +28,15 @@ void Scene::Init()
 	m_background->Init("Resources/Textures/Background.bmp", glm::vec3(WINDOW_WIDTH/80, WINDOW_HEIGHT/80, 0), 0.0f, glm::vec3(WINDOW_WIDTH/40, WINDOW_HEIGHT/40, 1), m_shader, *m_camera);
 	m_vecGameobjects->push_back(std::move(m_background));
 
-	m_ground->Init("Resources/Textures/Box.png", glm::vec3(10, 0.0f, 1.0f), 0.0f, glm::vec3(WINDOW_WIDTH/80, 0, 0.0f), m_shader, *m_camera);
+	m_ground->Init("Resources/Textures/Box.png", glm::vec3(10, 0.0f, 1.0f), 0, glm::vec3(WINDOW_WIDTH/80, 1, 0.0f), m_shader, *m_camera);
 	m_ground->AddPhysics(true, COLLIDER_SQUARE, m_world);
 	m_vecGameobjects->push_back(std::move(m_ground));
 
-	m_ball->Init("Resources/Textures/Ball.png", glm::vec3(5.0f, 5.0f, 1.0f), 0.0f, glm::vec3(1.0f, 1.0f, 0.0f), m_shader, *m_camera);
+	m_ball->Init("Resources/Textures/Ball.png", glm::vec3(5.0f, 10.0f, 1.0f), 0.0f, glm::vec3(1.0f, 1.0f, 0.0f), m_shader, *m_camera);
 	m_ball->AddPhysics(false, COLLIDER_CIRCLE, m_world);
 	m_vecGameobjects->push_back(std::move(m_ball));
 
-	m_ball2->Init("Resources/Textures/Ball.png", glm::vec3(5.5f, 5.5f, 1.0f), 0.0f, glm::vec3(1.0f, 1.0f, 0.0f), m_shader, *m_camera);
+	m_ball2->Init("Resources/Textures/Ball.png", glm::vec3(5.5f, 10.5f, 1.0f), 0.0f, glm::vec3(1.0f, 1.0f, 0.0f), m_shader, *m_camera);
 	m_ball2->AddPhysics(false, COLLIDER_CIRCLE, m_world);
 	m_vecGameobjects->push_back(std::move(m_ball2));
 

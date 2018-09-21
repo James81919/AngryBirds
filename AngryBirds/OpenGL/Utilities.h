@@ -21,6 +21,15 @@ enum InputState
 	INPUT_HOLD
 };
 
+enum InputMouse
+{
+	MOUSE_LEFT,
+	MOUSE_MIDDLE,
+	MOUSE_RIGHT
+};
+
 void Keyboard_Down(unsigned char key, int x, int y);
 
 void Keyboard_Up(unsigned char key, int x, int y);
+
+void Mouse(int button, int glutState, int x, int y);
