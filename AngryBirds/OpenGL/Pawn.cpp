@@ -34,7 +34,6 @@ void Pawn::AddPhysics(bool _bIsFixed, EColliderShape _colliderShape, b2World& _w
 		bd.type = b2_dynamicBody;
 		bd.fixedRotation = false;
 		bd.linearDamping = 0.35f;
-		b2Dest
 	}
 
 	bd.position = b2Vec2(m_position.x, m_position.y);
