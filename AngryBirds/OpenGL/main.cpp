@@ -51,6 +51,7 @@ int main(int argc, char** argv)
 
 	glutKeyboardFunc(Keyboard_Down);
 	glutKeyboardUpFunc(Keyboard_Up);
+	glutMouseFunc(Mouse);
 
 	glutDisplayFunc(Render);
 	glutIdleFunc(Update);
