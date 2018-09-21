@@ -35,6 +35,7 @@ public:
 	void SetScale(glm::vec3 _scale) { m_scale = _scale; }
 
 	b2Body* GetBody();
+	b2Body* m_physicsBody;
 
 protected:
 	std::unique_ptr<CSprite> m_sprite;
@@ -49,7 +50,7 @@ protected:
 	float m_fMaxforce;
 	float m_fMaxspeed;
 
-	b2Body* m_physicsBody;
+	
 
 	EColliderShape m_colliderShape;
 };
