@@ -6,6 +6,7 @@
 #include "Camera.h"
 #include "Pawn.h"
 #include "TextLabel.h"
+#include "Bird.h"
 
 class Scene
 {
@@ -23,11 +24,11 @@ private:
 
 	std::unique_ptr<Camera> m_camera;
 
-	std::unique_ptr<Pawn> m_background, m_ground, m_ball, m_ball2;
+	std::unique_ptr<Pawn> m_background, m_ground, m_ball, m_ball2, m_bird1;
 
 	std::unique_ptr<std::vector<std::unique_ptr<Pawn>>> m_vecGameobjects;
 
-	std::unique_ptr<TextLabel> m_label;
+	//std::unique_ptr<TextLabel> m_label;
 
 	float m_fGametimer = 60;
 	bool m_bIsFirstRun = false;
@@ -42,6 +43,5 @@ private:
 	int32 m_velocityInterations = 6;
 	int32 m_positionIterations = 2;
 	
-
 	b2GLDraw m_debugDraw;
 };
