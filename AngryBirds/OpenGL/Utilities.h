@@ -35,7 +35,10 @@ void Keyboard_Down(unsigned char key, int x, int y);
 void Keyboard_Up(unsigned char key, int x, int y);
 
 void Mouse(int button, int glutState, int x, int y);
+glm::vec2 GetMousePosition();
 
 bool GetMouseButtonDown(int _iButton);
+bool GetMouseButtonUp(int _iButton);
 
 bool GetKeyDown(unsigned char _cKey);
+bool GetKeyUp(unsigned char _cKey);

@@ -24,7 +24,8 @@ private:
 
 	std::unique_ptr<Camera> m_camera;
 
-	std::unique_ptr<Pawn> m_background, m_ground, m_ball, m_ball2, m_bird1;
+	std::unique_ptr<Pawn> m_background, m_ground, m_ball, m_ball2;
+	std::unique_ptr<CBird> m_bird;
 
 	std::unique_ptr<std::vector<std::unique_ptr<Pawn>>> m_vecGameobjects;
 

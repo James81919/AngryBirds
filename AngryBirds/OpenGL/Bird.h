@@ -19,7 +19,7 @@ public:
 	void CreateMouseJoint(float _x, float _y);
 
 private:
-	bool m_bIsDragable;
+	bool m_bIsDragable = true;
 	b2MouseJoint* m_mouseJoint;
 };
 

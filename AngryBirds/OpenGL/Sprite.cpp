@@ -24,6 +24,7 @@ CSprite::~CSprite()
 void CSprite::Init()
 {
 	glGenTextures(1, &m_tex);
+
 	glBindTexture(GL_TEXTURE_2D, m_tex);
 	int width, height;
 	unsigned char* image = SOIL_load_image(
