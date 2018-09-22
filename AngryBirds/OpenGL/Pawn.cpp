@@ -63,8 +63,6 @@ void Pawn::AddPhysics(bool _bIsFixed, EColliderShape _colliderShape, b2World& _w
 		fixtureDef.friction = 1.0f;
 		m_physicsBody->CreateFixture(&fixtureDef);
 	}
-
-	m_world = &_world;
 }
 
 void Pawn::Update(float _fDeltaTime, glm::mat4 _view, glm::mat4 _projection, glm::vec3 _cameraPos)
