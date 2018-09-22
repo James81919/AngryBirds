@@ -142,6 +142,7 @@
   <ItemGroup>
     <ClCompile Include="b2GLDraw.cpp" />
     <ClCompile Include="Background.cpp" />
+    <ClCompile Include="Bird.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Pawn.cpp" />
@@ -160,6 +161,7 @@
   <ItemGroup>
     <ClInclude Include="b2GLDraw.h" />
     <ClInclude Include="Background.h" />
+    <ClInclude Include="Bird.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="glext.h" />
     <ClInclude Include="Input.h" />

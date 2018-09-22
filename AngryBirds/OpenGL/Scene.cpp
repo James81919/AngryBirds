@@ -10,12 +10,13 @@ Scene::Scene()
 	
 	m_camera = std::make_unique<Camera>();
 	
-	m_label = std::make_unique<TextLabel>("Player Score: " + std::to_string(m_fGametimer), "Resources/Fonts/arial.ttf", glm::vec2(10, 15));
+	//m_label = std::make_unique<TextLabel>("Player Score: " + std::to_string(m_fGametimer), "Resources/Fonts/arial.ttf", glm::vec2(10, 15));
 
 	m_background = std::make_unique<Background>();
 	m_ground = std::make_unique<Pawn>();
 	m_ball = std::make_unique<Pawn>();
 	m_ball2 = std::make_unique<Pawn>();
+	m_bird1 = std::make_unique<CBird>();
 	
 	m_vecGameobjects = std::make_unique<std::vector<std::unique_ptr<Pawn>>>();
 }
@@ -26,6 +27,11 @@ Scene::~Scene()
 
 void Scene::Init()
 {
+	// Creating groundbody
+	b2BodyDef bd;
+	m_world.CreateBody(&bd);
+
+
 	m_background->Init("Resources/Textures/Background.bmp", glm::vec3(WINDOW_WIDTH/80, WINDOW_HEIGHT/80, 0), 0.0f, glm::vec3(WINDOW_WIDTH/40, WINDOW_HEIGHT/40, 1), m_shader, *m_camera);
 	m_vecGameobjects->push_back(std::move(m_background));
 
@@ -39,6 +45,10 @@ void Scene::Init()
 
 	m_ball2->Init("Resources/Textures/Ball.png", glm::vec3(5.5f, 10.5f, 1.0f), 0.0f, glm::vec3(1.0f, 1.0f, 0.0f), m_shader, *m_camera);
 	m_ball2->AddPhysics(true, COLLIDER_CIRCLE, m_world);
+
+	m_bird1->Init("Resources/Textures/Bird.png", glm::vec3(12.5f, 10.5f, 1.0f), 0.0f, glm::vec3(1.0f, 1.0f, 0.0f), m_shader, *m_camera);
+	m_bird1->AddPhysics(false, COLLIDER_CIRCLE, m_world);
+	m_vecGameobjects->push_back(std::move(m_bird1));
 	
 	/*jointDef.Initialize(m_ball->m_physicsBody, m_ball2->m_physicsBody, m_ball->m_physicsBody->GetWorldCenter(), m_ball2->m_physicsBody->GetWorldCenter());
 	jointDef.collideConnected = true;
@@ -86,7 +96,7 @@ void Scene::Update()
 	m_ball->Update(m_fDeltaTime, m_camera->GetView(), m_camera->GetProjection(), m_camera->GetLocation());
 	m_ball2->Update(m_fDeltaTime, m_camera->GetView(), m_camera->GetProjection(), m_camera->GetLocation());
 	m_fGametimer -= m_fDeltaTime;
-	m_label->Update(std::to_string(static_cast<int>(m_fGametimer)));
+	//m_label->Update(std::to_string(static_cast<int>(m_fGametimer)));
 }
 
 void Scene::Render()
@@ -107,5 +117,5 @@ void Scene::Render()
 
 	m_ball->Render();
 	m_ball2->Render();
-	m_label->Render();
+	//m_label->Render();
 }

@@ -12,17 +12,30 @@ void Keyboard_Down(unsigned char key, int x, int y)
 	keyState[key] = INPUT_HOLD;
 }
 
-void Keyboard_Up(unsigned char key, int x, int y)
+void Keyboard_Up(unsigned char _iKey, int _iX, int _iY)
 {
-	keyState[key] = INPUT_RELEASED;
+	keyState[_iKey] = INPUT_RELEASED;
 }
 
-void Mouse(int button, int glutState, int x, int y)
+void Mouse(int _iButton, int _iGlutState, int _x, int _y)
 {
-	if (button < 3)
+	if (_iButton < 3)
 	{
-		MouseState[button] = (glutState == GLUT_DOWN) ? INPUT_HOLD : INPUT_RELEASED;
+		MouseState[_iButton] = (_iGlutState == GLUT_DOWN) ? INPUT_HOLD : INPUT_RELEASED;
 	}
+}
+
+bool GetMouseButtonDown(int _iButton)
+{
+	if (_iButton < 3)
+	{
+		return (MouseState[_iButton] == INPUT_HOLD) ? true : false;
+	}
+}
+
+bool GetKeyDown(unsigned char _cKey)
+{
+	return (keyState[_cKey] == INPUT_HOLD) ? true : false;
 }
 
 void ResetFalse()
