@@ -33,7 +33,7 @@ void Scene::Init()
 	m_ground->AddPhysics(true, COLLIDER_SQUARE, m_world);
 	m_vecGameobjects->push_back(std::move(m_ground));
 
-	m_ball->Init("Resources/Textures/Ball.png", glm::vec3(5.0f, 10.0f, 1.0f), 0.0f, glm::vec3(1.0f, 1.0f, 0.0f), m_shader, *m_camera);
+	m_ball->Init("Resources/Textures/Ball.png", glm::vec3(8.0f, 12.0f, 1.0f), 0.0f, glm::vec3(1.0f, 1.0f, 0.0f), m_shader, *m_camera);
 	m_ball->AddPhysics(false, COLLIDER_CIRCLE, m_world);
 	
 
@@ -46,11 +46,11 @@ void Scene::Init()
 	
 	
 	jointDef.Initialize(m_ball->m_physicsBody, m_ball2->m_physicsBody, m_ball2->m_physicsBody->GetWorldCenter(), worldAxis);
-	jointDef.lowerTranslation = -5.0f;
+	jointDef.lowerTranslation = -10.0f;
 	jointDef.upperTranslation = 2.5f;
 	jointDef.enableLimit = true;
-	jointDef.maxMotorForce = 1.0f;
-	jointDef.motorSpeed = 0.0f;
+	jointDef.maxMotorForce = 5.0f;
+	jointDef.motorSpeed = 2.0f;
 	jointDef.enableMotor = true;
 	m_world.CreateJoint(&jointDef);
 	m_world.SetDebugDraw(&m_debugDraw);

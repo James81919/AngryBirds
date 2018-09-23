@@ -37,6 +37,7 @@ private:
 	b2World m_world = b2World(b2Vec2(0,-9.81f));
 	b2PrismaticJointDef jointDef;
 	/*b2DistanceJointDef jointDef;*/
+
 	b2Vec2 worldAxis = b2Vec2(1.0f, 0.0f);
 	float32 m_timeStep = 1.0f / 60.0f;
 	int32 m_velocityInterations = 6;
