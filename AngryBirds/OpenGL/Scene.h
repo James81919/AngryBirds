@@ -37,6 +37,7 @@ private:
 	float m_fPreviousTime = 0;
 
 	b2World m_world = b2World(b2Vec2(0,-9.81f));
+	b2Body* m_worldbody;
 	b2PrismaticJointDef jointDef;
 	/*b2DistanceJointDef jointDef;*/
 
