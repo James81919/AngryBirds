@@ -10,6 +10,8 @@
 #include "Dependencies\glm\gtc\matrix_transform.hpp"
 #include "Dependencies\glm\gtc\type_ptr.hpp"
 
+//#include "Pawn.h"
+
 const int WINDOW_WIDTH = 1000;
 const int WINDOW_HEIGHT = 600;
 
@@ -33,3 +35,10 @@ void Keyboard_Down(unsigned char key, int x, int y);
 void Keyboard_Up(unsigned char key, int x, int y);
 
 void Mouse(int button, int glutState, int x, int y);
+glm::vec2 GetMousePosition();
+
+bool GetMouseButtonDown(int _iButton);
+bool GetMouseButtonUp(int _iButton);
+
+bool GetKeyDown(unsigned char _cKey);
+bool GetKeyUp(unsigned char _cKey);

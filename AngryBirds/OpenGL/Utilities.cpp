@@ -4,31 +4,67 @@
 #include "Dependencies/freeglut/freeglut.h"
 #include <math.h>
 
-unsigned char keyState[255];
-unsigned char MouseState[3];
+unsigned char g_cKeyState[255];
+unsigned char g_cMouseState[3];
+
+glm::vec2 g_mousePos;
 
 void Keyboard_Down(unsigned char key, int x, int y)
 {
-	keyState[key] = INPUT_HOLD;
+	g_cKeyState[key] = INPUT_HOLD;
 }
 
-void Keyboard_Up(unsigned char key, int x, int y)
+void Keyboard_Up(unsigned char _iKey, int _iX, int _iY)
 {
-	keyState[key] = INPUT_RELEASED;
+	g_cKeyState[_iKey] = INPUT_RELEASED;
 }
 
-void Mouse(int button, int glutState, int x, int y)
+void Mouse(int _iButton, int _iGlutState, int _x, int _y)
 {
-	if (button < 3)
+	if (_iButton < 3)
 	{
-		MouseState[button] = (glutState == GLUT_DOWN) ? INPUT_HOLD : INPUT_RELEASED;
+		g_cMouseState[_iButton] = (_iGlutState == GLUT_DOWN) ? INPUT_HOLD : INPUT_RELEASED;
 	}
+
+	g_mousePos.x = (((float)_x / WINDOW_WIDTH) - 0.5f) * 2;
+	g_mousePos.y = ((1 - (float)_y / WINDOW_HEIGHT) - 0.5f) * 2;
+}
+
+bool GetMouseButtonDown(int _iButton)
+{
+	if (_iButton < 3)
+	{
+		return (g_cMouseState[_iButton] == INPUT_HOLD) ? true : false;
+	}
+}
+
+bool GetMouseButtonUp(int _iButton)
+{
+	if (_iButton < 3)
+	{
+		return (g_cMouseState[_iButton] == INPUT_RELEASED) ? true : false;
+	}
+}
+
+bool GetKeyDown(unsigned char _cKey)
+{
+	return (g_cKeyState[_cKey] == INPUT_HOLD) ? true : false;
+}
+
+bool GetKeyUp(unsigned char _cKey)
+{
+	return (g_cKeyState[_cKey] == INPUT_RELEASED) ? true : false;
+}
+
+glm::vec2 GetMousePosition()
+{
+	return (g_mousePos);
 }
 
 void ResetFalse()
 {
 	for (int i = 0; i < 255; i++)
 	{
-		keyState[i] = FALSE;
+		g_cKeyState[i] = FALSE;
 	}
 }

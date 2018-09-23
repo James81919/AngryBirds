@@ -50,7 +50,5 @@ protected:
 	float m_fMaxforce;
 	float m_fMaxspeed;
 
-	
-
 	EColliderShape m_colliderShape;
 };
