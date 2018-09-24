@@ -144,6 +144,7 @@
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="Bird.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="ContactListener.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Pawn.cpp" />
     <ClCompile Include="Pig.cpp" />
@@ -164,6 +165,7 @@
     <ClInclude Include="Background.h" />
     <ClInclude Include="Bird.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="ContactListener.h" />
     <ClInclude Include="glext.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Pawn.h" />

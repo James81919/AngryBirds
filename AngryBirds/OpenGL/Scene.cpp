@@ -2,6 +2,9 @@
 #include "Scene.h"
 #include "Dependencies/freeglut/freeglut.h"
 #include "Background.h"
+#include "ContactListener.h"
+
+MyContactListener g_myContactListenerInstance;
 
 Scene::Scene()
 {
@@ -36,7 +39,7 @@ void Scene::Init()
 	// Creating groundbody
 	b2BodyDef bd;
 	m_worldbody = m_world.CreateBody(&bd);
-
+	m_world.SetContactListener(&g_myContactListenerInstance);
 
 	m_background->Init("Resources/Textures/Background.bmp", glm::vec3(WINDOW_WIDTH/80, WINDOW_HEIGHT/80, 0), 0.0f, glm::vec3(WINDOW_WIDTH/40, WINDOW_HEIGHT/40, 1), m_shader, *m_camera);
 	m_vecGameobjects->push_back(std::move(m_background));
