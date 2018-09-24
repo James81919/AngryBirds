@@ -6,6 +6,7 @@
 
 MyContactListener g_myContactListenerInstance;
 
+
 Scene::Scene()
 {
 	m_shader = m_shaderloader.CreateProgram("Resources/Shaders/3D.vs", "Resources/Shaders/3D.fs");
@@ -91,14 +92,14 @@ void Scene::Init()
 	jointDef.length = 2;*/
 	
 	
-	jointDef.Initialize(m_ball->m_physicsBody, m_ball2->m_physicsBody, m_ball2->m_physicsBody->GetWorldCenter(), worldAxis);
-	jointDef.lowerTranslation = -10.0f;
-	jointDef.upperTranslation = 2.5f;
-	jointDef.enableLimit = true;
-	jointDef.maxMotorForce = 5.0f;
-	jointDef.motorSpeed = 2.0f;
-	jointDef.enableMotor = true;
-	m_world.CreateJoint(&jointDef);
+	jointDef.Initialize(m_ball->m_physicsBody, m_ball2->m_physicsBody, m_ball->m_physicsBody->GetWorldCenter(), worldAxis);
+	joint = (b2PrismaticJoint*)m_world.CreateJoint(&jointDef);
+	joint->SetLimits(0.0f,2.5f);
+	joint->EnableLimit(true);
+	joint->SetMaxMotorForce(5.0f);
+	joint->SetMotorSpeed(motorspeed);
+	joint->EnableMotor(true);
+	
 	m_world.SetDebugDraw(&m_debugDraw);
 	uint32 flags = 0;
 	flags += b2Draw::e_shapeBit;
@@ -111,6 +112,12 @@ void Scene::Init()
 
 void Scene::Update()
 {
+	if (joint->GetJointTranslation() >= joint->GetUpperLimit()) {
+			joint->SetMotorSpeed(-motorspeed);
+	}
+	else if (joint->GetJointTranslation() <= joint->GetLowerLimit()) {
+		joint->SetMotorSpeed(motorspeed);
+	}
 	//DeltaTime
 	if (m_bIsFirstRun == false)
 	{
