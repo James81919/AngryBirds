@@ -39,7 +39,11 @@ private:
 
 	b2World m_world = b2World(b2Vec2(0,-9.81f));
 	b2Body* m_worldbody;
+	b2PrismaticJoint* joint;
 	b2PrismaticJointDef jointDef;
+	float motorspeed = 2.0f;
+	bool forward = true;
+	bool moving = true;
 	/*b2DistanceJointDef jointDef;*/
 
 	b2Vec2 worldAxis = b2Vec2(1.0f, 0.0f);
