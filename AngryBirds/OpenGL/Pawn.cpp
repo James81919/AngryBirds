@@ -2,6 +2,8 @@
 #include "Pawn.h"
 #include "Dependencies/glm/gtc/matrix_transform.hpp"
 
+#include <iostream>
+
 Pawn::Pawn()
 {
 	m_sprite = std::make_unique<CSprite>();
@@ -63,6 +65,8 @@ void Pawn::AddPhysics(bool _bIsFixed, EColliderShape _colliderShape, b2World& _w
 		fixtureDef.friction = 1.0f;
 		m_physicsBody->CreateFixture(&fixtureDef);
 	}
+
+	m_physicsBody->SetUserData(this);
 }
 
 void Pawn::Update(float _fDeltaTime, glm::mat4 _view, glm::mat4 _projection, glm::vec3 _cameraPos)
@@ -84,6 +88,11 @@ void Pawn::Update(float _fDeltaTime, glm::mat4 _view, glm::mat4 _projection, glm
 			),
 		_cameraPos
 	);
+
+	if (m_bIsContacting)
+	{
+		std::cout << "Pig Contacting" << std::endl;
+	}
 }
 
 void Pawn::Render()

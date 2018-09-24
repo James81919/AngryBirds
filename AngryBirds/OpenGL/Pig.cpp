@@ -2,7 +2,7 @@
 
 CPig::CPig()
 {
-
+	
 }
 
 CPig::~CPig()
