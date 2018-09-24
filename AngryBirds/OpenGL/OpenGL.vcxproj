@@ -146,6 +146,7 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Pawn.cpp" />
+    <ClCompile Include="Pig.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="ShaderLoader.cpp" />
     <ClCompile Include="Sprite.cpp" />
@@ -166,6 +167,7 @@
     <ClInclude Include="glext.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Pawn.h" />
+    <ClInclude Include="Pig.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="ShaderLoader.h" />
     <ClInclude Include="Sprite.h" />

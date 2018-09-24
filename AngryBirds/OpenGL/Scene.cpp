@@ -15,6 +15,13 @@ Scene::Scene()
 	m_ground = std::make_unique<Pawn>();
 	m_ball = std::make_unique<Pawn>();
 	m_ball2 = std::make_unique<Pawn>();
+	m_box1 = std::make_unique<Pawn>();
+	m_box2 = std::make_unique<Pawn>();
+	m_box3 = std::make_unique<Pawn>();
+	m_ball3 = std::make_unique<Pawn>();
+	m_pig1 = std::make_unique<CPig>();
+	m_pig2 = std::make_unique<CPig>();
+	m_pig3 = std::make_unique<CPig>();
 	m_bird = std::make_unique<CBird>();
 	
 	m_vecGameobjects = std::make_unique<std::vector<std::unique_ptr<Pawn>>>();
@@ -40,12 +47,39 @@ void Scene::Init()
 
 	m_ball->Init("Resources/Textures/Ball.png", glm::vec3(8.0f, 12.0f, 1.0f), 0.0f, glm::vec3(1.0f, 1.0f, 0.0f), m_shader, *m_camera);
 	m_ball->AddPhysics(false, COLLIDER_CIRCLE, m_world);
-	
 
 	m_ball2->Init("Resources/Textures/Ball.png", glm::vec3(5.5f, 10.5f, 1.0f), 0.0f, glm::vec3(1.0f, 1.0f, 0.0f), m_shader, *m_camera);
 	m_ball2->AddPhysics(true, COLLIDER_CIRCLE, m_world);
 
-	m_bird->Init("Resources/Textures/Bird.png", glm::vec3(12.5f, 10.5f, 1.0f), 0.0f, glm::vec3(1.0f, 1.0f, 0.0f), m_shader, *m_camera, m_worldbody);
+	m_box1->Init("Resources/Textures/Box.png", glm::vec3(15.5f, 6.0f, 1.0f), 0.0f, glm::vec3(0.5f, 5.0f, 0.0f), m_shader, *m_camera);
+	m_box1->AddPhysics(false, COLLIDER_SQUARE, m_world);
+	m_vecGameobjects->push_back(std::move(m_box1));
+
+	m_box2->Init("Resources/Textures/Box.png", glm::vec3(20.5f, 6.0f, 1.0f), 0.0f, glm::vec3(0.5f, 5.0f, 0.0f), m_shader, *m_camera);
+	m_box2->AddPhysics(false, COLLIDER_SQUARE, m_world);
+	m_vecGameobjects->push_back(std::move(m_box2));
+
+	m_box3->Init("Resources/Textures/Box.png", glm::vec3(18.0f, 12.0f, 1.0f), 0.0f, glm::vec3(5.0f, 0.5f, 0.0f), m_shader, *m_camera);
+	m_box3->AddPhysics(false, COLLIDER_SQUARE, m_world);
+	m_vecGameobjects->push_back(std::move(m_box3));
+
+	m_ball3->Init("Resources/Textures/Ball.png", glm::vec3(13.5f, 2.5f, 1.0f), 0.0f, glm::vec3(1.0f, 1.0f, 0.0f), m_shader, *m_camera);
+	m_ball3->AddPhysics(false, COLLIDER_CIRCLE, m_world);
+	m_vecGameobjects->push_back(std::move(m_ball3));
+
+	m_pig1->Init("Resources/Textures/Pig.png", glm::vec3(18.0f, 2.5f, 1.0f), 0.0f, glm::vec3(1.0f, 1.0f, 0.0f), m_shader, *m_camera);
+	m_pig1->AddPhysics(false, COLLIDER_CIRCLE, m_world);
+	m_vecGameobjects->push_back(std::move(m_pig1));
+
+	m_pig2->Init("Resources/Textures/Pig.png", glm::vec3(15.0f, 13.0f, 1.0f), 0.0f, glm::vec3(1.0f, 1.0f, 0.0f), m_shader, *m_camera);
+	m_pig2->AddPhysics(false, COLLIDER_CIRCLE, m_world);
+	m_vecGameobjects->push_back(std::move(m_pig2));
+
+	m_pig3->Init("Resources/Textures/Pig.png", glm::vec3(21.0f, 13.0f, 1.0f), 0.0f, glm::vec3(1.0f, 1.0f, 0.0f), m_shader, *m_camera);
+	m_pig3->AddPhysics(false, COLLIDER_CIRCLE, m_world);
+	m_vecGameobjects->push_back(std::move(m_pig3));
+
+	m_bird->Init("Resources/Textures/Bird.png", glm::vec3(10.5f, 10.5f, 1.0f), 0.0f, glm::vec3(1.0f, 1.0f, 0.0f), m_shader, *m_camera, m_worldbody);
 	m_bird->AddPhysics(false, COLLIDER_CIRCLE, m_world);
 
 	
