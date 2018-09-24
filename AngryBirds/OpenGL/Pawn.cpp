@@ -79,7 +79,7 @@ void Pawn::Update(float _fDeltaTime, glm::mat4 _view, glm::mat4 _projection, glm
 		_view,
 		(
 			glm::translate(glm::mat4(), m_position) *
-			glm::rotate(glm::mat4(), m_fRotation, glm::vec3(0, 0, 1)) *
+			glm::rotate(glm::mat4(), glm::radians(m_fRotation), glm::vec3(0, 0, 1)) *
 			glm::scale(glm::mat4(), m_scale)
 			),
 		_cameraPos

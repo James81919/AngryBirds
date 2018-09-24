@@ -7,6 +7,7 @@
 #include "Pawn.h"
 #include "TextLabel.h"
 #include "Bird.h"
+#include "Pig.h"
 
 class Scene
 {
@@ -24,7 +25,7 @@ private:
 
 	std::unique_ptr<Camera> m_camera;
 
-	std::unique_ptr<Pawn> m_background, m_ground, m_ball, m_ball2;
+	std::unique_ptr<Pawn> m_background, m_ground, m_ball, m_ball2, m_box1, m_box2, m_box3, m_ball3, m_pig1, m_pig2, m_pig3;
 	std::unique_ptr<CBird> m_bird;
 
 	std::unique_ptr<std::vector<std::unique_ptr<Pawn>>> m_vecGameobjects;
