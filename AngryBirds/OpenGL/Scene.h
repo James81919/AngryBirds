@@ -19,6 +19,8 @@ public:
 	void Update();
 	void Render();
 
+	void CheckForDeletion();
+
 private:
 	ShaderLoader m_shaderloader;
 	GLuint m_shader;

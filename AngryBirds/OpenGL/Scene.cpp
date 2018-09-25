@@ -116,6 +116,8 @@ void Scene::Init()
 
 void Scene::Update()
 {
+	CheckForDeletion();
+
 	if (joint->GetJointTranslation() >= joint->GetUpperLimit()) {
 			joint->SetMotorSpeed(-motorspeed);
 	}
@@ -167,4 +169,19 @@ void Scene::Render()
 	m_wall2->Render();
 	m_bird->Render();
 	//m_label->Render();
+}
+
+void Scene::CheckForDeletion()
+{
+	for (int i = 0; i < m_vecGameobjects->size(); i++)
+	{
+		if (m_vecGameobjects->at(i)->IsDead())
+		{
+			m_world.DestroyBody(m_vecGameobjects->at(i)->GetBody());
+			delete m_vecGameobjects->at(i).release();
+			m_vecGameobjects->erase(m_vecGameobjects->begin() + i);
+			CheckForDeletion();
+			return;
+		}
+	}
 }
