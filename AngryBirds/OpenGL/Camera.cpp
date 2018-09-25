@@ -18,7 +18,7 @@ Camera::Camera()
 			facing,
 			up);
 
-	projection = glm::ortho(0.0f, static_cast<float>(WINDOW_WIDTH) / 40, 0.0f, static_cast<float>(WINDOW_HEIGHT) / 40, 0.1f, 100.0f);
+	projection = glm::ortho(0.0f, static_cast<float>(WINDOW_WIDTH) / 20, 0.0f, static_cast<float>(WINDOW_HEIGHT) / 20, 0.1f, 100.0f);
 }
 
 Camera::~Camera()
