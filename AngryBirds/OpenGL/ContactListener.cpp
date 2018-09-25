@@ -23,8 +23,11 @@ void MyContactListener::BeginContact(b2Contact* _contact)
 		static_cast<Pawn*>(pawn2)->endContact();
 	}
 
-	pawn1->OnCollisionEnter(pawn2);
-	pawn2->OnCollisionEnter(pawn1);
+	if (pawn1 != nullptr && pawn2 != nullptr)
+	{
+		pawn1->OnCollisionEnter(pawn2);
+		pawn2->OnCollisionEnter(pawn1);
+	}
 }
 
 void MyContactListener::EndContact(b2Contact* _contact)

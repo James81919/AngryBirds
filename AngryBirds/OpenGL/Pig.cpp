@@ -4,7 +4,7 @@
 
 CPig::CPig()
 {
-	
+	m_fDeathForce = 10.0f;
 }
 
 CPig::~CPig()
@@ -31,13 +31,13 @@ void CPig::Render()
 
 void CPig::OnCollisionEnter(Pawn* _other)
 {
-	if ((float)_other->GetBody()->GetLinearVelocity().Length() > m_fDeathForce)
-	{
-
-	}
+	//if ((float)_other->GetBody()->GetLinearVelocity().Length() > m_fDeathForce)
+	//{
+		Death();
+	//}
 }
 
 void CPig::Death()
 {
-	
+	m_bIsDead = true;
 }

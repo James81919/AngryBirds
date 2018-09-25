@@ -17,7 +17,7 @@ public:
 	void Death();
 
 private:
-	float m_fDeathForce = 1.0f;
+	float m_fDeathForce;
 };
 
 #endif // !__PIG_H__

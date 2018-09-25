@@ -42,6 +42,8 @@ public:
 
 	virtual void OnCollisionEnter(Pawn* _other);
 
+	bool IsDead();
+
 protected:
 	std::unique_ptr<CSprite> m_sprite;
 
@@ -58,4 +60,5 @@ protected:
 	EColliderShape m_colliderShape;
 
 	bool m_bIsContacting = false;
+	bool m_bIsDead = false;
 };
