@@ -31,13 +31,13 @@ void CPig::Render()
 
 void CPig::OnCollisionEnter(Pawn* _other)
 {
-	if (_other->m_physicsBody->GetLinearVelocity().x >= m_fDeathForce || _other->m_physicsBody->GetLinearVelocity().y >= m_fDeathForce)
+	if ((float)_other->GetBody()->GetLinearVelocity().Length() > m_fDeathForce)
 	{
-		Death();
+
 	}
 }
 
 void CPig::Death()
 {
-	delete this;
+	
 }

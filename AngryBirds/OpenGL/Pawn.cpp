@@ -127,5 +127,5 @@ b2Body* Pawn::GetBody()
 
 void Pawn::OnCollisionEnter(Pawn* _other)
 {
-	std::cout << "dgfdfisghsdg \n";
+	
 }
