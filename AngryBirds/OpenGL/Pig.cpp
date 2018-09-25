@@ -2,7 +2,7 @@
 
 CPig::CPig()
 {
-
+	
 }
 
 CPig::~CPig()
@@ -25,4 +25,9 @@ void CPig::Update(float _deltaTime, glm::mat4 _view, glm::mat4 _projection, glm:
 void CPig::Render()
 {
 	Pawn::Render();
+}
+
+void CPig::OnTriggerEnter(Pawn _other)
+{
+	//if ()
 }

@@ -32,8 +32,8 @@ void Mouse(int _iButton, int _iGlutState, int _x, int _y)
 
 void Mouse_Down(int x, int y)
 {
-	g_mousePos.x = ((float)x / WINDOW_WIDTH) * 25;
-	g_mousePos.y = (1 - (float)y / WINDOW_HEIGHT) * 15;
+	g_mousePos.x = ((float)x / WINDOW_WIDTH) * 50;
+	g_mousePos.y = (1 - (float)y / WINDOW_HEIGHT) * 30;
 }
 
 bool GetMouseButtonDown(int _iButton)

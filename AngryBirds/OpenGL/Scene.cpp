@@ -3,6 +3,9 @@
 #include "Dependencies/freeglut/freeglut.h"
 #include "Background.h"
 #include <iostream>
+#include "ContactListener.h"
+MyContactListener g_myContactListenerInstance;
+
 
 
 Scene::Scene()
@@ -15,8 +18,8 @@ Scene::Scene()
 
 	m_background = std::make_unique<Background>();
 	m_ground = std::make_unique<Pawn>();
-	m_ball = std::make_unique<Pawn>();
-	m_ball2 = std::make_unique<Pawn>();
+	m_wall = std::make_unique<Pawn>();
+	m_wall2 = std::make_unique<Pawn>();
 	m_box1 = std::make_unique<Pawn>();
 	m_box2 = std::make_unique<Pawn>();
 	m_box3 = std::make_unique<Pawn>();
@@ -38,46 +41,46 @@ void Scene::Init()
 	// Creating groundbody
 	b2BodyDef bd;
 	m_worldbody = m_world.CreateBody(&bd);
+	m_world.SetContactListener(&g_myContactListenerInstance);
 
-
-	m_background->Init("Resources/Textures/Background.bmp", glm::vec3(WINDOW_WIDTH/80, WINDOW_HEIGHT/80, 0), 0.0f, glm::vec3(WINDOW_WIDTH/40, WINDOW_HEIGHT/40, 1), m_shader, *m_camera);
+	m_background->Init("Resources/Textures/Background.bmp", glm::vec3(WINDOW_WIDTH/40, WINDOW_HEIGHT/40, 0), 0.0f, glm::vec3(WINDOW_WIDTH/40, WINDOW_HEIGHT/40, 1), m_shader, *m_camera);
 	m_vecGameobjects->push_back(std::move(m_background));
 
 	m_ground->Init("Resources/Textures/Box.png", glm::vec3(10, 0.0f, 1.0f), 0, glm::vec3(100, 1, 0.0f), m_shader, *m_camera);
 	m_ground->AddPhysics(true, COLLIDER_SQUARE, m_world);
 	m_vecGameobjects->push_back(std::move(m_ground));
 
-	m_ball->Init("Resources/Textures/Ball.png", glm::vec3(8.0f, 12.0f, 1.0f), 0.0f, glm::vec3(1.0f, 1.0f, 0.0f), m_shader, *m_camera);
-	m_ball->AddPhysics(false, COLLIDER_CIRCLE, m_world);
+	m_wall->Init("Resources/Textures/Box.png", glm::vec3(20.0f, 10.0f, 1.0f), 0.0f, glm::vec3(1.0f, 1.0f, 0.0f), m_shader, *m_camera);
+	m_wall->AddPhysics(false, COLLIDER_SQUARE, m_world);
 
-	m_ball2->Init("Resources/Textures/Ball.png", glm::vec3(5.5f, 10.5f, 1.0f), 0.0f, glm::vec3(1.0f, 1.0f, 0.0f), m_shader, *m_camera);
-	m_ball2->AddPhysics(true, COLLIDER_CIRCLE, m_world);
+	m_wall2->Init("Resources/Textures/Box.png", glm::vec3(20.0f, 10.0f, 1.0f), 0.0f, glm::vec3(1.0f, 1.0f, 0.0f), m_shader, *m_camera);
+	m_wall2->AddPhysics(true, COLLIDER_SQUARE, m_world);
 
-	m_box1->Init("Resources/Textures/Box.png", glm::vec3(15.5f, 6.0f, 1.0f), 0.0f, glm::vec3(0.5f, 5.0f, 0.0f), m_shader, *m_camera);
+	m_box1->Init("Resources/Textures/Box.png", glm::vec3(35.5f, 3.0f, 1.0f), 0.0f, glm::vec3(0.5f, 3.0f, 0.0f), m_shader, *m_camera);
 	m_box1->AddPhysics(false, COLLIDER_SQUARE, m_world);
 	m_vecGameobjects->push_back(std::move(m_box1));
 
-	m_box2->Init("Resources/Textures/Box.png", glm::vec3(20.5f, 6.0f, 1.0f), 0.0f, glm::vec3(0.5f, 5.0f, 0.0f), m_shader, *m_camera);
+	m_box2->Init("Resources/Textures/Box.png", glm::vec3(40.5f, 3.0f, 1.0f), 0.0f, glm::vec3(0.5f, 3.0f, 0.0f), m_shader, *m_camera);
 	m_box2->AddPhysics(false, COLLIDER_SQUARE, m_world);
 	m_vecGameobjects->push_back(std::move(m_box2));
 
-	m_box3->Init("Resources/Textures/Box.png", glm::vec3(18.0f, 12.0f, 1.0f), 0.0f, glm::vec3(5.0f, 0.5f, 0.0f), m_shader, *m_camera);
+	m_box3->Init("Resources/Textures/Box.png", glm::vec3(38.0f, 7.5f, 1.0f), 0.0f, glm::vec3(5.0f, 0.5f, 0.0f), m_shader, *m_camera);
 	m_box3->AddPhysics(false, COLLIDER_SQUARE, m_world);
 	m_vecGameobjects->push_back(std::move(m_box3));
 
-	m_ball3->Init("Resources/Textures/Ball.png", glm::vec3(13.5f, 2.5f, 1.0f), 0.0f, glm::vec3(1.0f, 1.0f, 0.0f), m_shader, *m_camera);
+	m_ball3->Init("Resources/Textures/Ball.png", glm::vec3(33.5f, 2.5f, 1.0f), 0.0f, glm::vec3(1.0f, 1.0f, 0.0f), m_shader, *m_camera);
 	m_ball3->AddPhysics(false, COLLIDER_CIRCLE, m_world);
 	m_vecGameobjects->push_back(std::move(m_ball3));
 
-	m_pig1->Init("Resources/Textures/Pig.png", glm::vec3(18.0f, 2.5f, 1.0f), 0.0f, glm::vec3(1.0f, 1.0f, 0.0f), m_shader, *m_camera);
+	m_pig1->Init("Resources/Textures/Pig.png", glm::vec3(38.0f, 1.5f, 1.0f), 0.0f, glm::vec3(1.0f, 1.0f, 0.0f), m_shader, *m_camera);
 	m_pig1->AddPhysics(false, COLLIDER_CIRCLE, m_world);
 	m_vecGameobjects->push_back(std::move(m_pig1));
 
-	m_pig2->Init("Resources/Textures/Pig.png", glm::vec3(15.0f, 13.0f, 1.0f), 0.0f, glm::vec3(1.0f, 1.0f, 0.0f), m_shader, *m_camera);
+	m_pig2->Init("Resources/Textures/Pig.png", glm::vec3(35.0f, 9.0f, 1.0f), 0.0f, glm::vec3(1.0f, 1.0f, 0.0f), m_shader, *m_camera);
 	m_pig2->AddPhysics(false, COLLIDER_CIRCLE, m_world);
 	m_vecGameobjects->push_back(std::move(m_pig2));
 
-	m_pig3->Init("Resources/Textures/Pig.png", glm::vec3(21.0f, 13.0f, 1.0f), 0.0f, glm::vec3(1.0f, 1.0f, 0.0f), m_shader, *m_camera);
+	m_pig3->Init("Resources/Textures/Pig.png", glm::vec3(41.0f, 9.0f, 1.0f), 0.0f, glm::vec3(1.0f, 1.0f, 0.0f), m_shader, *m_camera);
 	m_pig3->AddPhysics(false, COLLIDER_CIRCLE, m_world);
 	m_vecGameobjects->push_back(std::move(m_pig3));
 
@@ -90,9 +93,13 @@ void Scene::Init()
 	jointDef.length = 2;*/
 	
 	
-	jointDef.Initialize(m_ball->m_physicsBody, m_ball2->m_physicsBody, m_ball->m_physicsBody->GetWorldCenter(), worldAxis);
+
+	jointDef.Initialize(m_wall->m_physicsBody, m_wall2->m_physicsBody, m_wall->m_physicsBody->GetWorldCenter(), worldAxis);
+	jointDef.localAxisA.Set(0, 1);
+	jointDef.localAnchorA.Set(-1, 4);
+	jointDef.localAnchorB.Set(-1, 4);
 	joint = (b2PrismaticJoint*)m_world.CreateJoint(&jointDef);
-	joint->SetLimits(0.0f,2.5f);
+	joint->SetLimits(0.0f, 2.5f);
 	joint->EnableLimit(true);
 	joint->SetMaxMotorForce(5.0f);
 	joint->SetMotorSpeed(motorspeed);
@@ -111,7 +118,8 @@ void Scene::Init()
 void Scene::Update()
 {
 
-	std::cout << "x:" << GetMousePosition().x + m_camera->GetLocation().x << " y:" << GetMousePosition().y + m_camera->GetLocation().y << std::endl;
+	//std::cout << "x:" << GetMousePosition().x + m_camera->GetLocation().x << " y:" << GetMousePosition().y + m_camera->GetLocation().y << std::endl;
+	std::cout << joint->GetJointTranslation() << std::endl;
 
 	if (joint->GetJointTranslation() >= joint->GetUpperLimit()) {
 			joint->SetMotorSpeed(-motorspeed);
@@ -137,8 +145,8 @@ void Scene::Update()
 			pawn->Update(m_fDeltaTime, m_camera->GetView(), m_camera->GetProjection(), m_camera->GetLocation());
 		}
 	}
-	m_ball->Update(m_fDeltaTime, m_camera->GetView(), m_camera->GetProjection(), m_camera->GetLocation());
-	m_ball2->Update(m_fDeltaTime, m_camera->GetView(), m_camera->GetProjection(), m_camera->GetLocation());
+	m_wall->Update(m_fDeltaTime, m_camera->GetView(), m_camera->GetProjection(), m_camera->GetLocation());
+	m_wall2->Update(m_fDeltaTime, m_camera->GetView(), m_camera->GetProjection(), m_camera->GetLocation());
 	m_bird->Update(m_fDeltaTime, m_camera->GetView(), m_camera->GetProjection(), m_camera->GetLocation());
 	m_fGametimer -= m_fDeltaTime;
 	//m_label->Update(std::to_string(static_cast<int>(m_fGametimer)));
@@ -160,8 +168,8 @@ void Scene::Render()
 		}
 	}
 
-	m_ball->Render();
-	m_ball2->Render();
+	m_wall->Render();
+	m_wall2->Render();
 	m_bird->Render();
 	//m_label->Render();
 }
