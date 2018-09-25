@@ -88,11 +88,6 @@ void Pawn::Update(float _fDeltaTime, glm::mat4 _view, glm::mat4 _projection, glm
 			),
 		_cameraPos
 	);
-
-	if (m_bIsContacting)
-	{
-		std::cout << "Pig Contacting" << std::endl;
-	}
 }
 
 void Pawn::Render()
@@ -128,4 +123,9 @@ glm::vec3 Pawn::limit(glm::vec3 _vec, float _max)
 b2Body* Pawn::GetBody()
 {
 	return(m_physicsBody);
+}
+
+void Pawn::OnCollisionEnter(Pawn _other)
+{
+
 }

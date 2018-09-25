@@ -26,3 +26,8 @@ void CPig::Render()
 {
 	Pawn::Render();
 }
+
+void CPig::OnTriggerEnter(Pawn _other)
+{
+	//if ()
+}
