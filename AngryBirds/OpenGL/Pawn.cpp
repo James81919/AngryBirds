@@ -50,7 +50,7 @@ void Pawn::AddPhysics(bool _bIsFixed, EColliderShape _colliderShape, b2World& _w
 		objectShape.m_radius = m_scale.x;
 		b2FixtureDef fixtureDef;
 		fixtureDef.shape = &objectShape;
-		fixtureDef.density = 1.0f;
+		fixtureDef.density = 3.0f;
 		fixtureDef.friction = 1.0f;
 		m_physicsBody->CreateFixture(&fixtureDef);
 	}
@@ -125,7 +125,12 @@ b2Body* Pawn::GetBody()
 	return(m_physicsBody);
 }
 
-void Pawn::OnCollisionEnter(Pawn _other)
+void Pawn::OnCollisionEnter(Pawn* _other)
 {
+	
+}
 
+bool Pawn::IsDead()
+{
+	return(m_bIsDead);
 }

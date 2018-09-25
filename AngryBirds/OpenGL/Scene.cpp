@@ -2,7 +2,6 @@
 #include "Scene.h"
 #include "Dependencies/freeglut/freeglut.h"
 #include "Background.h"
-#include <iostream>
 #include "ContactListener.h"
 MyContactListener g_myContactListenerInstance;
 
@@ -138,9 +137,7 @@ void Scene::Init()
 
 void Scene::Update()
 {
-
-	//std::cout << "x:" << GetMousePosition().x + m_camera->GetLocation().x << " y:" << GetMousePosition().y + m_camera->GetLocation().y << std::endl;
-	std::cout << joint->GetJointTranslation() << std::endl;
+	CheckForDeletion();
 
 	if (joint->GetJointTranslation() >= joint->GetUpperLimit()) {
 			joint->SetMotorSpeed(-motorspeed);
@@ -195,4 +192,19 @@ void Scene::Render()
 	m_bird->Render();
 	m_slingshot->Render();
 	//m_label->Render();
+}
+
+void Scene::CheckForDeletion()
+{
+	for (int i = 0; i < m_vecGameobjects->size(); i++)
+	{
+		if (m_vecGameobjects->at(i)->IsDead())
+		{
+			m_world.DestroyBody(m_vecGameobjects->at(i)->GetBody());
+			delete m_vecGameobjects->at(i).release();
+			m_vecGameobjects->erase(m_vecGameobjects->begin() + i);
+			CheckForDeletion();
+			return;
+		}
+	}
 }

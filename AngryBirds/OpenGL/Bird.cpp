@@ -2,6 +2,7 @@
 #include <chrono>
 #include <thread>
 
+
 CBird::CBird()
 {
 
@@ -33,6 +34,7 @@ void CBird::Init(std::string _sFilepath, glm::vec3 _vecPosition, float _fRotatio
 void CBird::Update(float _deltaTime, glm::mat4 _view, glm::mat4 _projection, glm::vec3 _cameraPos)
 {
 	Pawn::Update(_deltaTime, _view, _projection, _cameraPos);
+
 	
 	if (m_physicsBody->GetFixtureList()->TestPoint(b2Vec2(GetMousePosition().x, GetMousePosition().y)) && GetMouseButtonDown(0)) {
 		SetIsDragable(true);
@@ -49,6 +51,7 @@ void CBird::Update(float _deltaTime, glm::mat4 _view, glm::mat4 _projection, glm
 		jointdef.dampingRatio = 5;
 		joint = (b2DistanceJoint*)m_world->CreateJoint(&jointdef);
 	}
+
 
 
 	if (GetMouseButtonDown(0) && IsDragable())
