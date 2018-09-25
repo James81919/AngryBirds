@@ -125,7 +125,7 @@ b2Body* Pawn::GetBody()
 	return(m_physicsBody);
 }
 
-void Pawn::OnCollisionEnter(Pawn _other)
+void Pawn::OnCollisionEnter(Pawn* _other)
 {
-
+	std::cout << "dgfdfisghsdg \n";
 }

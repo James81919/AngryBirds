@@ -40,7 +40,7 @@ public:
 	void startContact() { m_bIsContacting = true; }
 	void endContact() { m_bIsContacting = false; }
 
-	virtual void OnCollisionEnter(Pawn _other);
+	virtual void OnCollisionEnter(Pawn* _other);
 
 protected:
 	std::unique_ptr<CSprite> m_sprite;
