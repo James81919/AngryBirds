@@ -12,10 +12,12 @@ public:
 	virtual void Init(std::string _sFilepath, glm::vec3 _vecPosition, float _fRotation, glm::vec3 _vecScale, GLuint& _shader, Camera _camera, b2Body* _worldbody);
 	virtual void Update(float _deltaTime, glm::mat4 _view, glm::mat4 _projection, glm::vec3 _cameraPos);
 	virtual void Render();
-	virtual void OnTriggerEnter(Pawn _other);
+	virtual void OnCollisionEnter(Pawn* _other) override;
+
+	void Death();
 
 private:
-	float m_fDeathForce;
+	float m_fDeathForce = 1.0f;
 };
 
 #endif // !__PIG_H__

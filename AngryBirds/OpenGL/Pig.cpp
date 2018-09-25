@@ -1,5 +1,7 @@
 #include "Pig.h"
 
+#include <iostream>
+
 CPig::CPig()
 {
 	
@@ -27,7 +29,15 @@ void CPig::Render()
 	Pawn::Render();
 }
 
-void CPig::OnTriggerEnter(Pawn _other)
+void CPig::OnCollisionEnter(Pawn* _other)
 {
-	//if ()
+	if ((float)_other->GetBody()->GetLinearVelocity().Length() > m_fDeathForce)
+	{
+
+	}
+}
+
+void CPig::Death()
+{
+	
 }

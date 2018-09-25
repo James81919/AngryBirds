@@ -1,5 +1,6 @@
 #include "Bird.h"
 
+
 CBird::CBird()
 {
 
@@ -30,8 +31,6 @@ void CBird::Init(std::string _sFilepath, glm::vec3 _vecPosition, float _fRotatio
 void CBird::Update(float _deltaTime, glm::mat4 _view, glm::mat4 _projection, glm::vec3 _cameraPos)
 {
 	Pawn::Update(_deltaTime, _view, _projection, _cameraPos);
-	
-	
 
 	if (GetMouseButtonDown(0))
 	{

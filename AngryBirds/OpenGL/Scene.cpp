@@ -2,7 +2,6 @@
 #include "Scene.h"
 #include "Dependencies/freeglut/freeglut.h"
 #include "Background.h"
-#include <iostream>
 #include "ContactListener.h"
 MyContactListener g_myContactListenerInstance;
 
@@ -117,10 +116,6 @@ void Scene::Init()
 
 void Scene::Update()
 {
-
-	//std::cout << "x:" << GetMousePosition().x + m_camera->GetLocation().x << " y:" << GetMousePosition().y + m_camera->GetLocation().y << std::endl;
-	std::cout << joint->GetJointTranslation() << std::endl;
-
 	if (joint->GetJointTranslation() >= joint->GetUpperLimit()) {
 			joint->SetMotorSpeed(-motorspeed);
 	}
