@@ -25,7 +25,7 @@ private:
 
 	std::unique_ptr<Camera> m_camera;
 
-	std::unique_ptr<Pawn> m_background, m_ground, m_wall, m_wall2, m_box1, m_box2, m_box3, m_ball3, m_pig1, m_pig2, m_pig3;
+	std::unique_ptr<Pawn> m_background, m_slingshot, m_ground, m_ball, m_ropesquare, m_wall, m_wall2, m_box1, m_box2, m_box3, m_ball3, m_pig1, m_pig2, m_pig3;
 	std::unique_ptr<CBird> m_bird;
 
 	std::unique_ptr<std::vector<std::unique_ptr<Pawn>>> m_vecGameobjects;
@@ -41,6 +41,8 @@ private:
 	b2Body* m_worldbody;
 	b2PrismaticJoint* joint;
 	b2PrismaticJointDef jointDef;
+	b2RopeJointDef jointropedef;
+	
 	float motorspeed = 2.0f;
 	bool forward = true;
 	bool moving = true;

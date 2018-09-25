@@ -17,7 +17,10 @@ Scene::Scene()
 	//m_label = std::make_unique<TextLabel>("Player Score: " + std::to_string(m_fGametimer), "Resources/Fonts/arial.ttf", glm::vec2(10, 15));
 
 	m_background = std::make_unique<Background>();
+	m_slingshot = std::make_unique<Pawn>();
 	m_ground = std::make_unique<Pawn>();
+	m_ball = std::make_unique<Pawn>();
+	m_ropesquare = std::make_unique<Pawn>();
 	m_wall = std::make_unique<Pawn>();
 	m_wall2 = std::make_unique<Pawn>();
 	m_box1 = std::make_unique<Pawn>();
@@ -45,6 +48,10 @@ void Scene::Init()
 
 	m_background->Init("Resources/Textures/Background.bmp", glm::vec3(WINDOW_WIDTH/40, WINDOW_HEIGHT/40, 0), 0.0f, glm::vec3(WINDOW_WIDTH/40, WINDOW_HEIGHT/40, 1), m_shader, *m_camera);
 	m_vecGameobjects->push_back(std::move(m_background));
+
+	m_slingshot->Init("Resources/Textures/Box.png", glm::vec3(5.0f, 6.0f, 1.0f), 0.0f, glm::vec3(1.0f, 1.0f, 0.0f), m_shader, *m_camera);
+	m_slingshot->AddPhysics(true, COLLIDER_SQUARE, m_world);
+	
 
 	m_ground->Init("Resources/Textures/Box.png", glm::vec3(10, 0.0f, 1.0f), 0, glm::vec3(100, 1, 0.0f), m_shader, *m_camera);
 	m_ground->AddPhysics(true, COLLIDER_SQUARE, m_world);
@@ -84,22 +91,36 @@ void Scene::Init()
 	m_pig3->AddPhysics(false, COLLIDER_CIRCLE, m_world);
 	m_vecGameobjects->push_back(std::move(m_pig3));
 
-	m_bird->Init("Resources/Textures/Bird.png", glm::vec3(10.5f, 10.5f, 1.0f), 0.0f, glm::vec3(1.0f, 1.0f, 0.0f), m_shader, *m_camera, m_worldbody);
+	m_bird->Init("Resources/Textures/Bird.png", glm::vec3(10.5f, 10.5f, 1.0f), 0.0f, glm::vec3(1.0f, 1.0f, 0.0f), m_shader, *m_camera, &m_world, m_slingshot->GetBody());
 	m_bird->AddPhysics(false, COLLIDER_CIRCLE, m_world);
+	
 
+	m_ball->Init("Resources/Textures/ball.png", glm::vec3(29.5f, 30.0f, 1.0f), 0.0f, glm::vec3(1.0f, 1.0f, 0.0f), m_shader, *m_camera);
+	m_ball->AddPhysics(true, COLLIDER_CIRCLE, m_world);
+
+	m_ropesquare->Init("Resources/Textures/Box.png", glm::vec3(29.5f, 10.0f, 1.0f), 0.0f, glm::vec3(5.0f, 1.0f, 0.0f), m_shader, *m_camera);
+	m_ropesquare->AddPhysics(false, COLLIDER_SQUARE, m_world);
 	
 	/*jointDef.Initialize(m_ball->m_physicsBody, m_ball2->m_physicsBody, m_ball->m_physicsBody->GetWorldCenter(), m_ball2->m_physicsBody->GetWorldCenter());
 	jointDef.collideConnected = true;
 	jointDef.length = 2;*/
 	
+	jointropedef.bodyA = m_ball->GetBody();
+	jointropedef.bodyB = m_ropesquare->GetBody();
 	
+	jointropedef.maxLength = 22;
+
+	m_world.CreateJoint(&jointropedef);
+
+	m_vecGameobjects->push_back(std::move(m_ball));
+	m_vecGameobjects->push_back(std::move(m_ropesquare));
 
 	jointDef.Initialize(m_wall->m_physicsBody, m_wall2->m_physicsBody, m_wall->m_physicsBody->GetWorldCenter(), worldAxis);
-	jointDef.localAxisA.Set(0, 1);
-	jointDef.localAnchorA.Set(-1, 4);
-	jointDef.localAnchorB.Set(-1, 4);
+	//jointDef.localAxisA.Set(0, 1);
+	//jointDef.localAnchorA.Set(-1, 4);
+	//jointDef.localAnchorB.Set(-1, 4);
 	joint = (b2PrismaticJoint*)m_world.CreateJoint(&jointDef);
-	joint->SetLimits(0.0f, 2.5f);
+	joint->SetLimits(0.0f, 3.0f);
 	joint->EnableLimit(true);
 	joint->SetMaxMotorForce(5.0f);
 	joint->SetMotorSpeed(motorspeed);
@@ -148,6 +169,7 @@ void Scene::Update()
 	m_wall->Update(m_fDeltaTime, m_camera->GetView(), m_camera->GetProjection(), m_camera->GetLocation());
 	m_wall2->Update(m_fDeltaTime, m_camera->GetView(), m_camera->GetProjection(), m_camera->GetLocation());
 	m_bird->Update(m_fDeltaTime, m_camera->GetView(), m_camera->GetProjection(), m_camera->GetLocation());
+	m_slingshot->Update(m_fDeltaTime, m_camera->GetView(), m_camera->GetProjection(), m_camera->GetLocation());
 	m_fGametimer -= m_fDeltaTime;
 	//m_label->Update(std::to_string(static_cast<int>(m_fGametimer)));
 }
@@ -171,5 +193,6 @@ void Scene::Render()
 	m_wall->Render();
 	m_wall2->Render();
 	m_bird->Render();
+	m_slingshot->Render();
 	//m_label->Render();
 }
